@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 const API_URL = "http://localhost:8080/contacts";
 import './App.css';
+
 function App() {
   const [contacts, setContacts] = useState([]);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
@@ -14,8 +15,9 @@ function App() {
     try {
       const res = await fetch(`${API_URL}?page=1&limit=100`);
       const data = await res.json();
-      setContacts(data.data);
+      setContacts(Array.isArray(data.data) ? data.data : []);
     } catch (err) {
+      setContacts([]);
       console.error("Failed to fetch contacts", err);
     }
   };
@@ -78,11 +80,11 @@ function App() {
         <h1>Contact Book</h1>
         <div className="layout">
           <div className="contacts">
-            {contacts.length === 0 ? (
+            {(contacts ?? []).length === 0 ? (
               <p>No contacts, click <strong>Add</strong> to add one.</p>
             ) : (
               <ul className="contact-list">
-                {contacts.map((contact) => (
+                {(contacts ?? []).map((contact) => (
                   <li key={contact._id} className="contact-card">
                     <div>
                       <strong>{contact.name}</strong>
@@ -135,7 +137,6 @@ function App() {
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

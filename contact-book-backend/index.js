@@ -11,7 +11,8 @@ app.use(cors());
 const contactRoutes = require('./routes/contactRoutes');
 app.use('/contacts', contactRoutes);
 
-const uri = "mongodb+srv://saimanoharvelaga007_db_user:KJupC4s8qntraZJF@cluster0.vv4a9sg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb+srv://saimanoharvelaga007_db_user:Mcn8DtgQogwvnlgT@cluster0.vv4a9sg.mongodb.net/contactBookDB?retryWrites=true&w=majority&appName=Cluster0";
+
 
 mongoose.connect(uri)
   .then(() => {
