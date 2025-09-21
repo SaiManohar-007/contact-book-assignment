@@ -1,8 +1,8 @@
+require('dotenv').config(); 
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
 
 const app = express();
 app.use(express.json());
@@ -11,8 +11,8 @@ app.use(cors());
 const contactRoutes = require('./routes/contactRoutes');
 app.use('/contacts', contactRoutes);
 
-const uri = "mongodb+srv://saimanoharvelaga007_db_user:Mcn8DtgQogwvnlgT@cluster0.vv4a9sg.mongodb.net/contactBookDB?retryWrites=true&w=majority&appName=Cluster0";
 
+const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri)
   .then(() => {
@@ -21,8 +21,6 @@ mongoose.connect(uri)
   .catch((error) => {
     console.error('MongoDB Atlas connection error:', error);
   });
-
-
 
 app.get('/', (req, res) => {
   res.send('API is running');
