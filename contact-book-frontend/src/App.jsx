@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-const API_URL = "http://localhost:8080/contacts";
+//const API_URL = "http://localhost:8080/contacts";
+const API_URL = 'https://contact-book-assignment.onrender.com/contacts';
+
 import './App.css';
 
 function App() {
